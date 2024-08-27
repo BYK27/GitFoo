@@ -112,3 +112,34 @@ Traceback (most recent call last):
   File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\pandas\io\common.py", line 707, in get_handle
     newline="",
 FileNotFoundError: [Errno 2] No such file or directory: 'meta/verified_val.tsv'
+
+
+
+(oldenv) PS D:\diplomski\Spas-Za-Has\src\model> python .\pretrain.py
+Traceback (most recent call last):
+  File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\pandas\core\indexes\base.py", line 3361, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas\_libs\index.pyx", line 76, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5198, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5206, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'class'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ".\pretrain.py", line 42, in <module>
+    train_generator = create_generator(train_image_paths, train_labels, datagen, batch_size=32)
+  File ".\pretrain.py", line 40, in create_generator
+    return datagen.flow_from_dataframe(df, x_col='filename', y_col='class', target_size=(299, 299), batch_size=batch_size, class_mode='categorical')
+  File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\keras\preprocessing\image.py", line 1827, in flow_from_dataframe
+    dtype=self.dtype,
+  File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\keras\preprocessing\image.py", line 974, in __init__
+    df, classes = self._filter_classes(df, y_col, classes)
+  File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\keras\preprocessing\image.py", line 1111, in _filter_classes
+    for v in df[y_col]:
+  File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\pandas\core\frame.py", line 3458, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\pandas\core\indexes\base.py", line 3363, in get_loc
+    raise KeyError(key) from err
+KeyError: 'class'
