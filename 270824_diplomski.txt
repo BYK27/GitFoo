@@ -143,3 +143,40 @@ Traceback (most recent call last):
   File "D:\diplomski\Spas-Za-Has\oldenv\lib\site-packages\pandas\core\indexes\base.py", line 3363, in get_loc
     raise KeyError(key) from err
 KeyError: 'class'
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+from keras.preprocessing.image import ImageDataGenerator
+
+# Load the TSV file
+df = pd.read_csv('meta/verified_train.tsv', sep='\t', header=0, names=['class_name/key', 'verification_label'])
+
+# Split the class_name/key column
+df[['class_name', 'filename']] = df['class_name/key'].str.split('/', 1, expand=True)
+
+# Filter for verified images
+df = df[df['verification_label'] == 1]
+
+# Initialize ImageDataGenerator
+datagen = ImageDataGenerator(rescale=1./255)
+
+# Create the data generator
+train_generator = datagen.flow_from_dataframe(
+    df,
+    x_col='filename',
+    y_col='class_name',
+    directory='path_to_image_directory',  # adjust to your image directory path
+    target_size=(299, 299),
+    batch_size=32,
+    class_mode='categorical'
+)
